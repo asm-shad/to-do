@@ -28,9 +28,12 @@ export function AddTaskModal() {
     const dispatch = useAppDispatch();
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
-        // console.log(data);
-        dispatch(addTask(data as ITask));
-    }
+    const transformedData = {
+        ...data,
+        dueDate: data.dueDate?.toISOString() || null,
+    };
+    dispatch(addTask(transformedData as ITask));
+    };
 
   return (
     <Dialog>
